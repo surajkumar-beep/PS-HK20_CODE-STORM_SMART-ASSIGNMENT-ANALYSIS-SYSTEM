@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+<div class="auth-card">
+    <h2>Teacher Login</h2>
+
+    <form method="post">
+        <div class="input-group">
+            <input type="email" name="email" placeholder="Email" required id="email">
+            <label for="email">Email</label>
+            <i class="fas fa-envelope"></i>
+        </div>
+
+        <div class="input-group">
+            <input type="password" name="password" placeholder="Password" required id="password">
+            <label for="password">Password</label>
+            <i class="fas fa-lock"></i>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="switch">
+        New teacher?
+        <a href="{{ url_for('auth.register') }}">Register here</a>
+    </div>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+</div>
+
+</body>
+</html>

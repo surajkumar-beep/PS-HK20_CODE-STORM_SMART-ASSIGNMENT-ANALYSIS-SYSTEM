@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment Analytics Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-chart-line"></i> Assignment Analytics Dashboard</h1>
+            <p class="teacher-name">
+                <i class="fas fa-user-graduate"></i>
+                Logged in as: <strong>{{ teacher_name }}</strong>
+            </p>
+            
+            <div class="export-buttons">
+                <a href="{{ url_for('export_pdf') }}" class="btn-export btn-pdf">
+                    <i class="fas fa-file-pdf"></i> Export PDF
+                </a>
+                <a href="{{ url_for('export_text') }}" class="btn-export btn-text">
+                    <i class="fas fa-file-alt"></i> Export Text
+                </a>
+                <a href="{{ url_for('export_excel') }}" class="btn-export btn-excel">
+                    <i class="fas fa-file-excel"></i> Export Excel
+                </a>
+            </div>
+
+            <div class="header-stats">
+                <div class="stat-card small">
+                    <div class="stat-icon"><i class="fas fa-question"></i></div>
+                    <div class="stat-value">{{ grouped_data|length }}</div>
+                    <div class="stat-label">Questions</div>
+                </div>
+                <div class="stat-card small">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-value">{{ total_students }}</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="stat-card small">
+                    <div class="stat-icon"><i class="fas fa-percentage"></i></div>
+                    <div class="stat-value">{{ (overall_avg_similarity * 100)|round(1) }}%</div>
+                    <div class="stat-label">Avg Similarity</div>
+                </div>
+            </div>
+        </div>
+
+        {% if student_classification %}
+        <div class="student-overview-section" style="background: var(--bg-card); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 1px solid var(--border-color);">
+            <h2><i class="fas fa-users-cog"></i> Individual Student Performance</h2>
+            
+            {% if student_classification.strong %}
+            <div style="margin-top: 1.5rem;">
+                <h3 style="color: var(--accent-success); cursor: pointer;" onclick="toggleStudentSection('strong')">
+                    <i class="fas fa-star"></i> Top Performers ({{ student_classification.strong|length }})
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">(Click to expand/collapse)</span>
+                </h3>
+                <div id="strong-section" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    {% for student in student_classification.strong[:4] %}
+                    <div style="display: flex; justify-content: space-between; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px; border: 1px solid var(--accent-success);">
+                        <div>
+                            <strong>{{ student.name }}</strong>
+                            <div style="color: var(--text-secondary); font-size: 0.85rem;">ID: {{ student.student_id }}</div>
+                            <div style="color: var(--text-secondary); font-size: 0.8rem;">Avg Answer: {{ student.avg_answer_length }} words</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="color: var(--accent-success); font-size: 1.5rem; font-weight: bold;">{{ student.avg_score }}</span>
+                            <div style="color: var(--text-secondary); font-size: 0.7rem;">points</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if student_classification.strong|length > 4 %}
+                <div id="strong-more" style="display: none; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    {% for student in student_classification.strong[4:] %}
+                    <div style="display: flex; justify-content: space-between; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 10px; border: 1px solid var(--accent-success);">
+                        <div>
+                            <strong>{{ student.name }}</strong>
+                            <div style="color: var(--text-secondary); font-size: 0.85rem;">ID: {{ student.student_id }}</div>
+                            <div style="color: var(--text-secondary); font-size: 0.8rem;">Avg Answer: {{ student.avg_answer_length }} words</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="color: var(--accent-success); font-size: 1.5rem; font-weight: bold;">{{ student.avg_score }}</span>
+                            <div style="color: var(--text-secondary); font-size: 0.7rem;">points</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button id="strong-btn" onclick="toggleStudentSection('strong')" style="margin-top: 1rem; background: transparent; border: 1px solid var(--accent-success); color: var(--accent-success); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">Show More ({{ student_classification.strong|length - 4 }} more)</button>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% if student_classification.average %}
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--accent-warning); cursor: pointer;" onclick="toggleStudentSection('average')">
+                    <i class="fas fa-user"></i> Average Performers ({{ student_classification.average|length }})
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">(Click to expand/collapse)</span>
+                </h3>
+                <div id="average-section" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    {% for student in student_classification.average[:4] %}
+                    <div style="display: flex; justify-content: space-between; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px; border: 1px solid var(--accent-warning);">
+                        <div>
+                            <strong>{{ student.name }}</strong>
+                            <div style="color: var(--text-secondary); font-size: 0.85rem;">ID: {{ student.student_id }}</div>
+                            <div style="color: var(--text-secondary); font-size: 0.8rem;">Avg Answer: {{ student.avg_answer_length }} words</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="color: var(--accent-warning); font-size: 1.5rem; font-weight: bold;">{{ student.avg_score }}</span>
+                            <div style="color: var(--text-secondary); font-size: 0.7rem;">points</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if student_classification.average|length > 4 %}
+                <div id="average-more" style="display: none; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    {% for student in student_classification.average[4:] %}
+                    <div style="display: flex; justify-content: space-between; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 10px; border: 1px solid var(--accent-warning);">
+                        <div>
+                            <strong>{{ student.name }}</strong>
+                            <div style="color: var(--text-secondary); font-size: 0.85rem;">ID: {{ student.student_id }}</div>
+                            <div style="color: var(--text-secondary); font-size: 0.8rem;">Avg Answer: {{ student.avg_answer_length }} words</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="color: var(--accent-warning); font-size: 1.5rem; font-weight: bold;">{{ student.avg_score }}</span>
+                            <div style="color: var(--text-secondary); font-size: 0.7rem;">points</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button id="average-btn" onclick="toggleStudentSection('average')" style="margin-top: 1rem; background: transparent; border: 1px solid var(--accent-warning); color: var(--accent-warning); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">Show More ({{ student_classification.average|length - 4 }} more)</button>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% if student_classification.weak %}
+            <div style="margin-top: 2rem;">
+                <h3 style="color: var(--accent-danger); cursor: pointer;" onclick="toggleStudentSection('weak')">
+                    <i class="fas fa-exclamation-circle"></i> Students Needing Attention ({{ student_classification.weak|length }})
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">(Click to expand/collapse)</span>
+                </h3>
+                <div id="weak-section" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    {% for student in student_classification.weak[:4] %}
+                    <div style="display: flex; justify-content: space-between; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px; border: 1px solid var(--accent-danger);">
+                        <div>
+                            <strong>{{ student.name }}</strong>
+                            <div style="color: var(--text-secondary); font-size: 0.85rem;">ID: {{ student.student_id }}</div>
+                            <div style="color: var(--text-secondary); font-size: 0.8rem;">Avg Answer: {{ student.avg_answer_length }} words</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="color: var(--accent-danger); font-size: 1.5rem; font-weight: bold;">{{ student.avg_score }}</span>
+                            <div style="color: var(--text-secondary); font-size: 0.7rem;">points</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if student_classification.weak|length > 4 %}
+                <div id="weak-more" style="display: none; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    {% for student in student_classification.weak[4:] %}
+                    <div style="display: flex; justify-content: space-between; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px; border: 1px solid var(--accent-danger);">
+                        <div>
+                            <strong>{{ student.name }}</strong>
+                            <div style="color: var(--text-secondary); font-size: 0.85rem;">ID: {{ student.student_id }}</div>
+                            <div style="color: var(--text-secondary); font-size: 0.8rem;">Avg Answer: {{ student.avg_answer_length }} words</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="color: var(--accent-danger); font-size: 1.5rem; font-weight: bold;">{{ student.avg_score }}</span>
+                            <div style="color: var(--text-secondary); font-size: 0.7rem;">points</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button id="weak-btn" onclick="toggleStudentSection('weak')" style="margin-top: 1rem; background: transparent; border: 1px solid var(--accent-danger); color: var(--accent-danger); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">Show More ({{ student_classification.weak|length - 4 }} more)</button>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if conceptual_errors %}
+        <div class="conceptual-errors-section" style="background: var(--bg-card); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 1px solid var(--border-color);">
+            <h2 style="color: var(--accent-warning);"><i class="fas fa-bug"></i> Detected Conceptual Errors</h2>
+        </div>
+        {% endif %}
+
+        {% for question, entries in grouped_data.items() %}
+        <div class="question-section" data-question="{{ question }}">
+            <div class="question-header">
+                <h2><i class="fas fa-question-circle"></i> Q{{ question }}</h2>
+                {% if entries and entries[0].question_text %}
+                <p class="question-text">
+                    <i class="fas fa-quote-left"></i>
+                    {{ entries[0].question_text }}
+                    <i class="fas fa-quote-right"></i>
+                </p>
+                {% endif %}
+            </div>
+
+            <hr>
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- Similarity Distribution -->
+                <div style="background: linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.15) 100%); border-radius: 20px; padding: 2rem; border: 1px solid rgba(99,102,241,0.3); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%); border-radius: 50%;"></div>
+                    <div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%); border-radius: 50%;"></div>
+                    
+                    <h4 style="text-align: center; margin-bottom: 1.5rem; color: #a5b4fc; font-size: 1.2rem; font-weight: 600; position: relative; z-index: 1;">
+                        <i class="fas fa-chart-pie" style="margin-right: 8px;"></i> Similarity Distribution
+                    </h4>
+                    
+                    <div style="position: relative; z-index: 1;">
+                        <canvas id="similarityChart{{ question }}" style="max-width: 200px; max-height: 200px; margin: 0 auto; display: block; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));"></canvas>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; position: relative; z-index: 1;">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="width: 12px; height: 12px; background: #10b981; border-radius: 50%;"></span>
+                            <span style="font-size: 0.85rem; color: #6ee7b7;">High (>80%)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="width: 12px; height: 12px; background: #f59e0b; border-radius: 50%;"></span>
+                            <span style="font-size: 0.85rem; color: #fbbf24;">Medium (50-80%)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <span style="width: 12px; height: 12px; background: #ef4444; border-radius: 50%;"></span>
+                            <span style="font-size: 0.85rem; color: #f87171;">Low (<50%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Insights & Confidence - Enhanced -->
+                <div style="background: linear-gradient(135deg, rgba(236,72,153,0.15) 0%, rgba(168,85,247,0.15) 100%); border-radius: 20px; padding: 2.5rem; border: 1px solid rgba(236,72,153,0.3); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -20px; left: -20px; width: 120px; height: 120px; background: radial-gradient(circle, rgba(236,72,153,0.2) 0%, transparent 70%); border-radius: 50%;"></div>
+                    <div style="position: absolute; bottom: -30px; right: -30px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%); border-radius: 50%;"></div>
+                    
+                    <h4 style="text-align: center; margin-bottom: 2rem; color: #f472b6; font-size: 1.3rem; font-weight: 700; position: relative; z-index: 1;">
+                        <i class="fas fa-chart-bar" style="margin-right: 10px;"></i> Insights & Confidence
+                    </h4>
+                    
+                    <div style="position: relative; z-index: 1;">
+                        <canvas id="insightChart{{ question }}" style="width: 100%; max-height: 300px; margin: 0 auto; display: block; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));"></canvas>
+                    </div>
+                    
+                    <!-- Score Display Below -->
+                    <div style="display: flex; justify-content: center; gap: 3rem; margin-top: 2.5rem; position: relative; z-index: 1;">
+                        <div style="text-align: center; padding: 1.5rem 2.5rem; background: linear-gradient(135deg, rgba(99,102,241,0.4) 0%, rgba(79,70,229,0.4) 100%); border-radius: 20px; border: 1px solid rgba(99,102,241,0.6); min-width: 160px; box-shadow: 0 8px 32px rgba(99,102,241,0.3);">
+                            <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #a5b4fc, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 10px rgba(99,102,241,0.5);">
+                                {{ scores[question].insight_score }}
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.95rem; color: #c7d2fe; margin-top: 8px;">
+                                <i class="fas fa-brain" style="font-size: 1.1rem;"></i> Insight Score
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding: 1.5rem 2.5rem; background: linear-gradient(135deg, rgba(139,92,246,0.4) 0%, rgba(124,58,237,0.4) 100%); border-radius: 20px; border: 1px solid rgba(139,92,246,0.6); min-width: 160px; box-shadow: 0 8px 32px rgba(139,92,246,0.3);">
+                            <div style="font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, #ddd6fe, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 10px rgba(139,92,246,0.5);">
+                                {{ scores[question].confidence_score }}
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.95rem; color: #ede9fe; margin-top: 8px;">
+                                <i class="fas fa-shield-alt" style="font-size: 1.1rem;"></i> Confidence
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-value">{{ insights[question].total_responses }}</div>
+                    <div class="stat-label">Responses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-brain"></i></div>
+                    <div class="stat-value">{{ scores[question].insight_score }}</div>
+                    <div class="stat-label">Insight Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="stat-value">{{ scores[question].confidence_score }}</div>
+                    <div class="stat-label">Confidence</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-heartbeat"></i></div>
+                    <div class="stat-value" style="color: {{ 'var(--accent-success)' if scores[question].understanding_level == 'High' else 'var(--accent-warning)' if scores[question].understanding_level == 'Moderate' else 'var(--accent-danger)' }}">
+                        {{ scores[question].understanding_level }}
+                    </div>
+                    <div class="stat-label">Understanding</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-signal"></i></div>
+                    <div class="stat-value" style="color: {{ 'var(--accent-success)' if insights[question].difficulty == 'Easy' else 'var(--accent-warning)' if insights[question].difficulty == 'Medium' else 'var(--accent-danger)' }}">
+                        {{ insights[question].difficulty }}
+                    </div>
+                    <div class="stat-label">Difficulty</div>
+                </div>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4><i class="fas fa-key"></i> Common Keywords</h4>
+                    <ul class="keyword-list">
+                        {% for word, count in insights[question].common_words[:5] %}
+                        <li>
+                            <span>{{ word }}</span>
+                            <span class="count">{{ count }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="insight-card">
+                    <h4><i class="fas fa-copy"></i> Repeated Answers</h4>
+                    <ul class="repeated-list">
+                        {% for answer in insights[question].frequent_answers[:3] %}
+                        <li>"{{ answer[:80] }}{% if answer|length > 80 %}...{% endif %}"</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            {% if clusters[question] %}
+            <div class="clusters-section">
+                <h3><i class="fas fa-object-group"></i> Answer Clusters</h3>
+                <div class="clusters-grid">
+                    {% for cluster in clusters[question] %}
+                    <div class="cluster-box" onclick="showClusterModal('{{ question }}', {{ loop.index0 }})">
+                        <div class="cluster-header">
+                            <h4>Cluster {{ loop.index }}</h4>
+                            <span class="cluster-size">{{ cluster|length }} answers</span>
+                        </div>
+                        <ul>
+                            {% for ans in cluster[:2] %}
+                            <li>"{{ ans[:60] }}{% if ans|length > 60 %}...{% endif %}"</li>
+                            {% endfor %}
+                            {% if cluster|length > 2 %}
+                            <li class="more">+{{ cluster|length - 2 }} more</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="responses-section">
+                <h3><i class="fas fa-user-answers"></i> Student Responses</h3>
+                <div class="response-list">
+                    {% for entry in entries[:10] %}
+                    <div class="response-item">
+                        <div class="student-info">
+                            <div class="student-avatar">{{ entry.student_name[0]|upper }}</div>
+                            <div>
+                                <strong>{{ entry.student_name }}</strong>
+                                <span class="student-id">ID: {{ entry.student_id }}</span>
+                            </div>
+                        </div>
+                        <p class="student-answer">{{ entry.answer }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="performance-metrics-grid">
+                <div class="metric-card">
+                    <h4><i class="fas fa-percentage"></i> Similarity Score</h4>
+                    <div class="metric-value">{{ (insights[question].avg_similarity * 100)|round(1) }}%</div>
+                    <p class="metric-desc">
+                        {% if insights[question].avg_similarity > 0.6 %}
+                        High similarity - answers are very similar
+                        {% elif insights[question].avg_similarity > 0.3 %}
+                        Moderate variation in answers
+                        {% else %}
+                        Diverse answers - many unique responses
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="metric-card">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Risk Level</h4>
+                    <div class="metric-value" style="color: {{ 'var(--accent-danger)' if scores[question].risk_level == 'High' else 'var(--accent-warning)' if scores[question].risk_level == 'Medium' else 'var(--accent-success)' }}">
+                        {{ scores[question].risk_level }}
+                    </div>
+                    <p class="metric-desc">
+                        {% if weak_concepts[question].short_answers > 0 %}
+                        {{ weak_concepts[question].short_answers }} short answers detected
+                        {% else %}
+                        No major risk factors detected
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="final-section">
+                <div class="weak-concepts">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Areas Needing Attention</h3>
+                    <div class="weak-stats">
+                        <div class="weak-stat">
+                            <span class="weak-number">{{ weak_concepts[question].short_answers }}</span>
+                            <span class="weak-label">Short Answers<br>(≤4 words)</span>
+                        </div>
+                        <div class="weak-stat">
+                            <span class="weak-number" style="color: {{ 'var(--accent-danger)' if weak_concepts[question].low_vocab_diversity else 'var(--accent-success)' }}">
+                                {{ 'Yes' if weak_concepts[question].low_vocab_diversity else 'No' }}
+                            </span>
+                            <span class="weak-label">Low Vocabulary<br>Diversity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="teaching-insight" id="teaching-insight-{{ question }}">
+                    <h3><i class="fas fa-lightbulb"></i> Teaching Recommendation</h3>
+                    <div class="insight-key-value">
+                        <span>Understanding Level</span>
+                        <strong>{{ summaries[question].understanding_level }}</strong>
+                    </div>
+                    <div class="insight-key-value">
+                        <span>Pattern Type</span>
+                        <strong>{{ summaries[question].pattern_type[:40] }}...</strong>
+                    </div>
+                    <div class="insight-key-value">
+                        <span>Risk Level</span>
+                        <strong>{{ summaries[question].risk_level }}</strong>
+                    </div>
+                    
+                    <!-- Teacher Feedback Section -->
+                    <div class="teacher-feedback-section" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                        <h4 style="color: var(--accent-primary); margin-bottom: 0.8rem;">
+                            <i class="fas fa-pen-to-square"></i> Teacher Feedback
+                        </h4>
+                        <div id="feedback-display-{{ question }}">
+                            <p id="feedback-text-{{ question }}" style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+                                {{ summaries[question].teaching_action }}
+                            </p>
+                            <button class="btn-edit-feedback" onclick="enableEditFeedback('{{ question }}')" style="background: var(--accent-primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">
+                                <i class="fas fa-edit"></i> Edit Feedback
+                            </button>
+                        </div>
+                        
+                        <div id="feedback-edit-{{ question }}" style="display: none;">
+                            <textarea id="feedback-textarea-{{ question }}" rows="4" style="width: 100%; padding: 0.8rem; border-radius: 10px; border: 2px solid var(--accent-primary); background: var(--bg-input); color: var(--text-primary); font-size: 0.95rem; resize: vertical; margin-bottom: 1rem;">{{ summaries[question].teaching_action }}</textarea>
+                            <div style="display: flex; gap: 0.8rem;">
+                                <button onclick="saveFeedback('{{ question }}')" style="background: var(--accent-success); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">
+                                    <i class="fas fa-save"></i> Save
+                                </button>
+                                <button onclick="cancelEditFeedback('{{ question }}')" style="background: var(--bg-input); color: var(--text-secondary); border: 1px solid var(--border-color); padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="feedback-message-{{ question }}" style="display: none; margin-top: 0.8rem; padding: 0.6rem; border-radius: 8px; font-size: 0.9rem;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="back-section">
+            <a href="{{ url_for('index') }}" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Upload New Assignment
+            </a>
+        </div>
+    </div>
+
+    <div id="clusterModal" class="cluster-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="modalTitle">Cluster Details</h4>
+                <span class="close-modal" onclick="closeClusterModal()">&times;</span>
+            </div>
+            <div class="cluster-answers-list" id="clusterAnswersList">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const clusterData = {{ clusters|tojson }};
+
+        function showClusterModal(question, clusterIndex) {
+            const modal = document.getElementById('clusterModal');
+            const title = document.getElementById('modalTitle');
+            const list = document.getElementById('clusterAnswersList');
+            
+            title.textContent = 'Cluster ' + (clusterIndex + 1) + ' - Question ' + question;
+            
+            const answers = clusterData[question][clusterIndex];
+            list.innerHTML = answers.map(ans => 
+                '<div class="cluster-answer">' + ans + '</div>'
+            ).join('');
+            
+            modal.classList.add('active');
+        }
+
+        function closeClusterModal() {
+            document.getElementById('clusterModal').classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('clusterModal');
+            if (event.target == modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        function toggleStudentSection(type) {
+            const moreSection = document.getElementById(type + '-more');
+            const btn = document.getElementById(type + '-btn');
+            
+            if (moreSection) {
+                if (moreSection.style.display === 'none') {
+                    moreSection.style.display = 'block';
+                    if (btn) btn.textContent = 'Show Less';
+                } else {
+                    moreSection.style.display = 'none';
+                }
+            }
+        }
+
+        // Feedback editing functions
+        function enableEditFeedback(questionId) {
+            document.getElementById('feedback-display-' + questionId).style.display = 'none';
+            document.getElementById('feedback-edit-' + questionId).style.display = 'block';
+        }
+
+        function cancelEditFeedback(questionId) {
+            document.getElementById('feedback-edit-' + questionId).style.display = 'none';
+            document.getElementById('feedback-display-' + questionId).style.display = 'block';
+            document.getElementById('feedback-message-' + questionId).style.display = 'none';
+        }
+
+        function saveFeedback(questionId) {
+            var newFeedback = document.getElementById('feedback-textarea-' + questionId).value;
+            var messageEl = document.getElementById('feedback-message-' + questionId);
+            
+            fetch('/save_feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    question_id: questionId,
+                    feedback: newFeedback
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('feedback-text-' + questionId).textContent = newFeedback;
+                    document.getElementById('feedback-edit-' + questionId).style.display = 'none';
+                    document.getElementById('feedback-display-' + questionId).style.display = 'block';
+                    
+                    messageEl.textContent = 'Feedback saved successfully!';
+                    messageEl.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+                    messageEl.style.color = 'var(--accent-success)';
+                    messageEl.style.display = 'block';
+                    
+                    setTimeout(function() {
+                        messageEl.style.display = 'none';
+                    }, 3000);
+                } else {
+                    messageEl.textContent = 'Error: ' + data.error;
+                    messageEl.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
+                    messageEl.style.color = 'var(--accent-danger)';
+                    messageEl.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                messageEl.textContent = 'Error saving feedback';
+                messageEl.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
+                messageEl.style.color = 'var(--accent-danger)';
+                messageEl.style.display = 'block';
+            });
+        }
+
+        var insights = {{ insights|tojson }};
+        var scores = {{ scores|tojson }};
+        var questionLabels = Object.keys(insights);
+        
+        setTimeout(function() {
+            questionLabels.forEach(function(q) {
+                const simCanvas = document.getElementById('similarityChart' + q);
+                if (simCanvas) {
+                    const simScore = insights[q] ? insights[q].avg_similarity : 0;
+                    const simPercent = simScore * 100;
+                    
+                    let highCount = 0, medCount = 0, lowCount = 0;
+                    if (simPercent > 80) {
+                        highCount = 1;
+                    } else if (simPercent >= 50 && simPercent <= 80) {
+                        medCount = 1;
+                    } else {
+                        lowCount = 1;
+                    }
+                    
+                    new Chart(simCanvas, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['High (>80%)', 'Medium (50-80%)', 'Low (<50%)'],
+                            datasets: [{
+                                data: [highCount, medCount, lowCount],
+                                backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: { color: '#b0b0b0', font: { size: 10 } }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                const insightCanvas = document.getElementById('insightChart' + q);
+                if (insightCanvas) {
+                    const insightScore = scores[q] ? scores[q].insight_score : 0;
+                    const confidenceScore = scores[q] ? scores[q].confidence_score : 0;
+                    
+                    new Chart(insightCanvas, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Insight Score', 'Confidence Score'],
+                            datasets: [{
+                                data: [insightScore, confidenceScore],
+                                backgroundColor: [
+                                    'rgba(99, 102, 241, 0.9)',
+                                    'rgba(139, 92, 246, 0.9)'
+                                ],
+                                borderColor: ['#6366f1', '#8b5cf6'],
+                                borderWidth: 2,
+                                borderRadius: 8,
+                                barThickness: 50
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            indexAxis: 'y',
+                            scales: {
+                                x: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    ticks: { color: '#b0b0b0', font: { size: 12 } },
+                                    grid: { color: '#333' }
+                                },
+                                y: {
+                                    ticks: { color: '#b0b0b0', font: { size: 14, weight: 'bold' } },
+                                    grid: { display: false }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        }, 100);
+    </script>
+</body>
+</html>

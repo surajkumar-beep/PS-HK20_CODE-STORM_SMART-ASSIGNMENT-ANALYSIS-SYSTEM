@@ -1,0 +1,355 @@
+/* ===========================
+   CLEAN DARK THEME - Login/Register
+   NO PINK/BABY BLUE - Purple/Cyan/Green Only
+=========================== */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+:root {
+    --bg-dark: #0a0a0f;
+    --bg-card: rgba(20, 20, 35, 0.95);
+    --primary: #8b5cf6;
+    --primary-glow: #8b5cf6;
+    --secondary: #06b6d4;
+    --accent-orange: #f97316;
+    --accent-green: #10b981;
+    --accent-yellow: #eab308;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ===========================
+   BODY WITH ANIMATED BACKGROUND
+=========================== */
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+/* Animated gradient orbs background - NO PINK */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: float 20s infinite ease-in-out;
+}
+
+.orb-1 {
+    width: 600px;
+    height: 600px;
+    background: #8b5cf6;
+    top: -200px;
+    left: -200px;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 500px;
+    height: 500px;
+    background: #06b6d4;
+    bottom: -150px;
+    right: -150px;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 400px;
+    height: 400px;
+    background: #10b981;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(50px, -50px) scale(1.1);
+    }
+    50% {
+        transform: translate(-30px, 30px) scale(0.95);
+    }
+    75% {
+        transform: translate(-50px, -30px) scale(1.05);
+    }
+}
+
+/* ===========================
+   CARD EFFECT
+=========================== */
+.auth-card {
+    width: 420px;
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 40px 36px;
+    position: relative;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px var(--glass-border);
+    backdrop-filter: blur(20px);
+}
+
+/* Glowing border effect - NO PINK */
+.auth-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 26px;
+    background: linear-gradient(45deg, #362954, #081643, #2a2a2a, #3e3232);
+    background-size: 400% 400%;
+    animation: borderGlow 8s ease infinite;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+@keyframes borderGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ===========================
+   HEADING
+=========================== */
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+/* ===========================
+   FORM WITH FLOATING LABELS
+=========================== */
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 18px 20px;
+    padding-left: 50px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input::placeholder {
+    color: transparent;
+}
+
+.input-group label {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group input:not(:placeholder-shown) {
+    border-color: var(--primary-glow);
+    background: rgba(139, 92, 246, 0.08);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 20px;
+    font-size: 0.75rem;
+    color: var(--primary-glow);
+    background: var(--bg-card);
+    padding: 0 8px;
+    border-radius: 8px;
+}
+
+/* Icon inside input */
+.input-group i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.input-group input:focus ~ i,
+.input-group input:not(:placeholder-shown) ~ i {
+    color: var(--primary-glow);
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+button {
+    margin-top: 8px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* ===========================
+   SWITCH LINK
+=========================== */
+.switch {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.switch a {
+    margin-left: 8px;
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.switch a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary);
+    transition: width 0.3s ease;
+}
+
+.switch a:hover {
+    color: var(--primary-glow);
+}
+
+.switch a:hover::after {
+    width: 100%;
+}
+
+/* ===========================
+   ERROR MESSAGE
+=========================== */
+.error {
+    margin-top: 20px;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-left: 4px solid #ef4444;
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: #fca5a5;
+    font-size: 0.9rem;
+}
+
+/* ===========================
+   DECORATIVE ELEMENTS
+=========================== */
+.auth-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* ===========================
+   MOBILE RESPONSIVE
+=========================== */
+@media (max-width: 480px) {
+    .auth-card {
+        width: 92%;
+        padding: 32px 24px;
+    }
+    
+    .auth-card h2 {
+        font-size: 1.6rem;
+    }
+    
+    .orb {
+        width: 300px !important;
+        height: 300px !important;
+    }
+}

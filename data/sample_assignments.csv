@@ -1,0 +1,166 @@
+student_id,student_name,question_id,question,answer
+101,Arjun,Q1,What is Recursion,A function calling itself
+101,Arjun,Q2,What is the Stack,Stack follows LIFO
+102,Rahul,Q1,What is Recursion,Recursion repeats a function again and again
+102,Rahul,Q2,What is the Stack,Stack stores function calls
+103,Priya,Q1,What is Recursion,It is a technique where a method calls itself
+103,Priya,Q2,What is the Stack,Stack is used during function execution
+104,Amit,Q1,What is Recursion,Recursion needs a base condition
+104,Amit,Q2,What is the Stack,Stack stores local variables
+105,Neha,Q1,What is Recursion,It solves problems by dividing them
+105,Neha,Q2,What is the Stack,Stack works on LIFO rule
+106,Ravi,Q1,What is Recursion,Function calls itself directly or indirectly
+106,Ravi,Q2,What is the Stack,Stack memory is used for function calls
+107,Anita,Q1,What is Recursion,Recursive function calls itself
+107,Anita,Q2,What is the Stack,Stack is temporary memory
+108,Suresh,Q1,What is Recursion,It is used in tree and graph problems
+108,Suresh,Q2,What is the Stack,Stack stores return address
+109,Pooja,Q1,What is Recursion,Recursion is an alternative to loops
+109,Pooja,Q2,What is the Stack,Stack stores execution details
+110,Karan,Q1,What is Recursion,Recursion breaks problem into smaller parts
+110,Karan,Q2,What is the Stack,Stack stores activation records
+111,Rohit,Q1,What is Recursion,Same function is called again inside itself
+111,Rohit,Q2,What is the Stack,Stack is fast memory
+112,Simran,Q1,What is Recursion,Recursion requires base case and recursive case
+112,Simran,Q2,What is the Stack,Stack stores parameters of functions
+113,Deepak,Q1,What is Recursion,It is used for solving repetitive problems
+113,Deepak,Q2,What is the Stack,Stack manages function execution
+114,Kavya,Q1,What is Recursion,Function calls itself until condition is met
+114,Kavya,Q2,What is the Stack,Stack holds temporary data
+115,Nitin,Q1,What is Recursion,Recursion reduces code size
+115,Nitin,Q2,What is the Stack,Stack stores call history
+116,Meena,Q1,What is Recursion,Recursion uses same logic repeatedly
+116,Meena,Q2,What is the Stack,Stack is used in program execution
+117,Akash,Q1,What is Recursion,Recursion works using function calls
+117,Akash,Q2,What is the Stack,Stack stores function frames
+118,Divya,Q1,What is Recursion,Recursion is useful for divide and conquer
+118,Divya,Q2,What is the Stack,Stack keeps track of active functions
+119,Sanjay,Q1,What is Recursion,Recursion is calling itself again
+119,Sanjay,Q2,What is the Stack,Stack stores intermediate results
+120,Rekha,Q1,What is Recursion,Recursive calls continue until base case
+120,Rekha,Q2,What is the Stack,Stack follows last in first out
+121,Manoj,Q1,What is Recursion,A function calling itself to solve a problem
+121,Manoj,Q2,What is the Stack,Stack stores function call information
+121,Manoj,Q3,What is Heap memory,Heap is used for dynamic memory allocation
+121,Manoj,Q4,Difference between Stack and Heap,Stack is automatic and heap is manual
+121,Manoj,Q5,What is Iteration,Repeating statements using loops
+122,Sunita,Q1,What is Recursion,Recursion is when a method calls itself
+122,Sunita,Q2,What is the Stack,Stack stores local variables
+122,Sunita,Q3,What is Heap memory,Heap stores objects created at runtime
+122,Sunita,Q4,Difference between Stack and Heap,Stack is faster than heap
+122,Sunita,Q5,What is Iteration,Iteration uses for and while loops
+123,Alok,Q1,What is Recursion,Recursive call is made inside a function
+123,Alok,Q2,What is the Stack,Stack follows LIFO
+123,Alok,Q3,What is Heap memory,Heap is large memory area
+123,Alok,Q4,Difference between Stack and Heap,Stack is small and heap is large
+123,Alok,Q5,What is Iteration,Iteration repeats steps again and again
+124,Neelam,Q1,What is Recursion,Recursion solves problem in smaller parts
+124,Neelam,Q2,What is the Stack,Stack stores return address
+124,Neelam,Q3,What is Heap memory,Heap memory is slower than stack
+124,Neelam,Q4,Difference between Stack and Heap,Heap is shared memory and stack is private
+124,Neelam,Q5,What is Iteration,Iteration is repetition using loop structure
+125,Vikas,Q1,What is Recursion,Recursion uses base condition
+125,Vikas,Q2,What is the Stack,Stack is temporary memory
+125,Vikas,Q3,What is Heap memory,Heap memory is used for dynamic objects
+125,Vikas,Q4,Difference between Stack and Heap,Stack stores function calls and heap stores objects
+125,Vikas,Q5,What is Iteration,Iteration avoids recursive calls
+126,Pankaj,Q1,What is Recursion,Function calls itself directly or indirectly
+126,Pankaj,Q2,What is the Stack,Stack holds activation records
+126,Pankaj,Q3,What is Heap memory,Heap is used for memory allocation during runtime
+126,Pankaj,Q4,Difference between Stack and Heap,Stack is faster but heap is flexible
+126,Pankaj,Q5,What is Iteration,Iteration executes a block multiple times
+127,Komal,Q1,What is Recursion,Recursion requires base case
+127,Komal,Q2,What is the Stack,Stack stores execution details
+127,Komal,Q3,What is Heap memory,Heap stores dynamically created data
+127,Komal,Q4,Difference between Stack and Heap,Stack memory is fixed and heap memory is dynamic
+127,Komal,Q5,What is Iteration,Iteration is looping until condition fails
+128,Tarun,Q1,What is Recursion,Recursive function calls itself again
+128,Tarun,Q2,What is the Stack,Stack is used during program execution
+128,Tarun,Q3,What is Heap memory,Heap memory is not automatically freed
+128,Tarun,Q4,Difference between Stack and Heap,Stack uses contiguous memory and heap uses free memory blocks
+128,Tarun,Q5,What is Iteration,Iteration is controlled repetition
+129,Shreya,Q1,What is Recursion,Recursion is alternative to iteration
+129,Shreya,Q2,What is the Stack,Stack keeps track of function calls
+129,Shreya,Q3,What is Heap memory,Heap is used to store objects
+129,Shreya,Q4,Difference between Stack and Heap,Stack stores local variables and heap stores objects
+129,Shreya,Q5,What is Iteration,Iteration is using loops to repeat steps
+130,Mohit,Q1,What is Recursion,Recursion reduces problem size
+130,Mohit,Q2,What is the Stack,Stack stores parameters
+130,Mohit,Q3,What is Heap memory,Heap is global memory area
+130,Mohit,Q4,Difference between Stack and Heap,Heap is slower compared to stack
+130,Mohit,Q5,What is Iteration,Iteration executes statements repeatedly
+131,Preeti,Q1,What is Recursion,Function calls itself until base case
+131,Preeti,Q2,What is the Stack,Stack supports nested calls
+131,Preeti,Q3,What is Heap memory,Heap memory is flexible
+131,Preeti,Q4,Difference between Stack and Heap,Stack is thread specific and heap is shared
+131,Preeti,Q5,What is Iteration,Iteration uses counter based loops
+132,Gaurav,Q1,What is Recursion,Recursion uses function call mechanism
+132,Gaurav,Q2,What is the Stack,Stack memory is limited
+132,Gaurav,Q3,What is Heap memory,Heap memory is larger than stack
+132,Gaurav,Q4,Difference between Stack and Heap,Stack is automatic and heap is manual
+132,Gaurav,Q5,What is Iteration,Iteration repeats logic many times
+133,Ritu,Q1,What is Recursion,Recursive solution is simple and readable
+133,Ritu,Q2,What is the Stack,Stack stores temporary variables
+133,Ritu,Q3,What is Heap memory,Heap memory is used for object creation
+133,Ritu,Q4,Difference between Stack and Heap,Stack is fast but heap is slow
+133,Ritu,Q5,What is Iteration,Iteration avoids deep function calls
+134,Anil,Q1,What is Recursion,Recursion uses function calling itself
+134,Anil,Q2,What is the Stack,Stack maintains call history
+134,Anil,Q3,What is Heap memory,Heap stores data until it is freed
+134,Anil,Q4,Difference between Stack and Heap,Stack memory is small and heap memory is large
+134,Anil,Q5,What is Iteration,Iteration is simpler than recursion in some cases
+135,Nisha,Q1,What is Recursion,Recursion is used in tree traversal
+135,Nisha,Q2,What is the Stack,Stack stores function frames
+135,Nisha,Q3,What is Heap memory,Heap is used for dynamic allocation of memory
+135,Nisha,Q4,Difference between Stack and Heap,Stack stores execution data and heap stores dynamic data
+135,Nisha,Q5,What is Iteration,Iteration repeats operations using loops
+136,Rahul,Q1,What is Recursion,Recursion is a technique where a function calls itself
+136,Rahul,Q2,What is the Stack,Stack stores function call details
+136,Rahul,Q3,What is Heap memory,Heap memory is used to store dynamic data
+136,Rahul,Q4,Difference between Stack and Heap,Stack is fast and heap is flexible
+136,Rahul,Q5,What is Iteration,Iteration repeats statements using loops
+137,Ayesha,Q1,What is Recursion,Recursive function keeps calling itself until base case
+137,Ayesha,Q2,What is the Stack,Stack stores local variables and parameters
+137,Ayesha,Q3,What is Heap memory,Heap memory is shared among functions
+137,Ayesha,Q4,Difference between Stack and Heap,Stack is limited in size and heap is large
+137,Ayesha,Q5,What is Iteration,Iteration uses for loop and while loop
+138,Harish,Q1,What is Recursion,Recursion solves a problem by dividing it into sub problems
+138,Harish,Q2,What is the Stack,Stack follows last in first out rule
+138,Harish,Q3,What is Heap memory,Heap is used for runtime memory allocation
+138,Harish,Q4,Difference between Stack and Heap,Stack is automatic and heap is manually managed
+138,Harish,Q5,What is Iteration,Iteration executes code repeatedly until condition fails
+139,Kiran,Q1,What is Recursion,It is a programming method where function calls itself
+139,Kiran,Q2,What is the Stack,Stack keeps track of active functions
+139,Kiran,Q3,What is Heap memory,Heap memory stores objects created during execution
+139,Kiran,Q4,Difference between Stack and Heap,Stack stores call data and heap stores objects
+139,Kiran,Q5,What is Iteration,Iteration is repeating steps using loop structure
+140,Farah,Q1,What is Recursion,Recursion needs both base case and recursive case
+140,Farah,Q2,What is the Stack,Stack memory is used during method calls
+140,Farah,Q3,What is Heap memory,Heap memory is used for dynamic allocation
+140,Farah,Q4,Difference between Stack and Heap,Stack is faster than heap
+140,Farah,Q5,What is Iteration,Iteration runs a block of code again and again
+141,Dev,Q1,What is Recursion,Recursive call is made from inside the same function
+141,Dev,Q2,What is the Stack,Stack stores return address and parameters
+141,Dev,Q3,What is Heap memory,Heap stores dynamically created objects
+141,Dev,Q4,Difference between Stack and Heap,Stack is private to a thread and heap is shared
+141,Dev,Q5,What is Iteration,Iteration avoids recursive overhead
+142,Pallavi,Q1,What is Recursion,Recursion is useful for problems like factorial and trees
+142,Pallavi,Q2,What is the Stack,Stack stores function frames
+142,Pallavi,Q3,What is Heap memory,Heap memory is larger than stack memory
+142,Pallavi,Q4,Difference between Stack and Heap,Stack uses fixed size and heap grows dynamically
+142,Pallavi,Q5,What is Iteration,Iteration is simple repetition using loops
+143,Ramesh,Q1,What is Recursion,Same function is executed repeatedly by calling itself
+143,Ramesh,Q2,What is the Stack,Stack supports nested function calls
+143,Ramesh,Q3,What is Heap memory,Heap memory remains until it is freed
+143,Ramesh,Q4,Difference between Stack and Heap,Stack stores execution data and heap stores dynamic data
+143,Ramesh,Q5,What is Iteration,Iteration controls repetition using conditions
+144,Isha,Q1,What is Recursion,Recursion reduces problem size step by step
+144,Isha,Q2,What is the Stack,Stack is used for storing temporary values
+144,Isha,Q3,What is Heap memory,Heap is used for storing objects
+144,Isha,Q4,Difference between Stack and Heap,Heap is slower but more flexible than stack
+144,Isha,Q5,What is Iteration,Iteration uses loop counters
+145,Sameer,Q1,What is Recursion,Recursion is an alternative way to solve repetitive tasks
+145,Sameer,Q2,What is the Stack,Stack stores data of running functions
+145,Sameer,Q3,What is Heap memory,Heap is global memory area for programs
+145,Sameer,Q4,Difference between Stack and Heap,Stack is small and heap is large
+145,Sameer,Q5,What is Iteration,Iteration repeats execution of statements

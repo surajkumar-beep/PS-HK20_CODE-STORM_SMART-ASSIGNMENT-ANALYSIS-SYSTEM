@@ -1,0 +1,220 @@
+student_id,student_name,question_id,question,answer
+101,Arjun,Q1,Explain recursion,Recursion is a technique where a function calls itself and stops using a base case
+102,Rahul,Q1,Explain recursion,Recursion means a function calling itself and using a base condition to stop
+103,Priya,Q1,Explain recursion,Recursion is when a function calls itself repeatedly with a base case
+104,Neha,Q1,Explain recursion,Recursion is a method in which a function invokes itself with a stopping condition
+105,Amit,Q1,Explain recursion,Recursion allows a function to call itself and must have a base case
+106,Sneha,Q1,Explain recursion,Recursion is a self calling function process with a base condition
+107,Ravi,Q1,Explain recursion,Recursion is calling the same function again with a base case
+108,Kiran,Q1,Explain recursion,Recursion is a function calling itself to solve smaller problems
+109,Pooja,Q1,Explain recursion,Recursion is a programming technique where a function calls itself
+110,Manoj,Q1,Explain recursion,Recursion is when a function solves a problem by calling itself
+
+101,Arjun,Q2,Explain stack,Stack is a linear data structure that follows LIFO principle
+102,Rahul,Q2,Explain stack,Stack follows LIFO and operations are done at the top
+103,Priya,Q2,Explain stack,Stack is a data structure where last element is removed first
+104,Neha,Q2,Explain stack,Stack uses LIFO rule for insertion and deletion
+105,Amit,Q2,Explain stack,Stack is a LIFO based linear structure
+106,Sneha,Q2,Explain stack,Stack allows push and pop at the top only
+107,Ravi,Q2,Explain stack,Stack works using last in first out rule
+108,Kiran,Q2,Explain stack,Stack is a structure following LIFO order
+109,Pooja,Q2,Explain stack,Stack stores data using LIFO principle
+110,Manoj,Q2,Explain stack,Stack is a simple LIFO data structure
+
+101,Arjun,Q3,Explain queue,Queue is a linear data structure that follows FIFO principle
+102,Rahul,Q3,Explain queue,Queue works on first in first out rule
+103,Priya,Q3,Explain queue,Queue inserts at rear and removes from front
+104,Neha,Q3,Explain queue,Queue follows FIFO order
+105,Amit,Q3,Explain queue,Queue stores elements in FIFO sequence
+106,Sneha,Q3,Explain queue,Queue is a FIFO based data structure
+107,Ravi,Q3,Explain queue,Queue removes elements from the front
+108,Kiran,Q3,Explain queue,Queue adds elements at the rear
+109,Pooja,Q3,Explain queue,Queue works using FIFO logic
+110,Manoj,Q3,Explain queue,Queue is a simple FIFO structure
+
+101,Arjun,Q4,Explain linked list,Linked list is a collection of nodes connected using pointers
+102,Rahul,Q4,Explain linked list,Linked list stores data in nodes linked together
+103,Priya,Q4,Explain linked list,Linked list connects elements using links
+104,Neha,Q4,Explain linked list,Linked list is a dynamic node based structure
+105,Amit,Q4,Explain linked list,Linked list uses pointers to connect nodes
+106,Sneha,Q4,Explain linked list,Linked list stores data using node connections
+107,Ravi,Q4,Explain linked list,Linked list contains nodes connected to each other
+108,Kiran,Q4,Explain linked list,Linked list is made of nodes and links
+109,Pooja,Q4,Explain linked list,Linked list allows easy insertion and deletion
+110,Manoj,Q4,Explain linked list,Linked list is a node based data structure
+
+101,Arjun,Q5,Explain binary tree,Binary tree is a tree where each node has at most two children
+102,Rahul,Q5,Explain binary tree,Binary tree allows left and right child only
+103,Priya,Q5,Explain binary tree,Binary tree is a hierarchical data structure
+104,Neha,Q5,Explain binary tree,Binary tree stores data in parent child form
+105,Amit,Q5,Explain binary tree,Binary tree supports two children per node
+106,Sneha,Q5,Explain binary tree,Binary tree is a node based tree structure
+107,Ravi,Q5,Explain binary tree,Binary tree contains at most two child nodes
+108,Kiran,Q5,Explain binary tree,Binary tree organizes data hierarchically
+109,Pooja,Q5,Explain binary tree,Binary tree has left and right child
+110,Manoj,Q5,Explain binary tree,Binary tree is used to represent hierarchical data
+
+101,Arjun,Q6,Explain BST,BST stores smaller values on left and larger values on right
+102,Rahul,Q6,Explain BST,BST follows ordering property in a binary tree
+103,Priya,Q6,Explain BST,BST keeps data in sorted form
+104,Neha,Q6,Explain BST,BST allows fast searching using order
+105,Amit,Q6,Explain BST,BST is an ordered binary tree
+106,Sneha,Q6,Explain BST,BST maintains left smaller and right greater rule
+107,Ravi,Q6,Explain BST,BST supports efficient searching
+108,Kiran,Q6,Explain BST,BST follows binary search property
+109,Pooja,Q6,Explain BST,BST keeps elements in ordered way
+110,Manoj,Q6,Explain BST,BST is a binary tree with order rule
+
+101,Arjun,Q7,Explain hashing,Hashing maps keys to index using a hash function
+102,Rahul,Q7,Explain hashing,Hashing converts keys into table positions
+103,Priya,Q7,Explain hashing,Hashing stores data using hash function
+104,Neha,Q7,Explain hashing,Hashing provides fast access to data
+105,Amit,Q7,Explain hashing,Hashing maps values to addresses
+106,Sneha,Q7,Explain hashing,Hashing generates index using a function
+107,Ravi,Q7,Explain hashing,Hashing supports fast searching
+108,Kiran,Q7,Explain hashing,Hashing stores key value pairs
+109,Pooja,Q7,Explain hashing,Hashing uses function to locate data
+110,Manoj,Q7,Explain hashing,Hashing helps quick data retrieval
+
+101,Arjun,Q8,Explain searching,Searching is the process of finding an element in a data structure
+102,Rahul,Q8,Explain searching,Searching locates a required value
+103,Priya,Q8,Explain searching,Searching finds an item in a list
+104,Neha,Q8,Explain searching,Searching checks whether an element exists
+105,Amit,Q8,Explain searching,Searching retrieves required data
+106,Sneha,Q8,Explain searching,Searching identifies a target element
+107,Ravi,Q8,Explain searching,Searching looks for a given value
+108,Kiran,Q8,Explain searching,Searching is data lookup process
+109,Pooja,Q8,Explain searching,Searching finds specific data
+110,Manoj,Q8,Explain searching,Searching is used to locate data
+
+101,Arjun,Q9,Explain sorting,Sorting is arranging data in a specific order
+102,Rahul,Q9,Explain sorting,Sorting organizes elements in order
+103,Priya,Q9,Explain sorting,Sorting arranges data in ascending or descending order
+104,Neha,Q9,Explain sorting,Sorting helps organize data
+105,Amit,Q9,Explain sorting,Sorting places elements in correct order
+106,Sneha,Q9,Explain sorting,Sorting rearranges elements
+107,Ravi,Q9,Explain sorting,Sorting improves data organization
+108,Kiran,Q9,Explain sorting,Sorting arranges values
+109,Pooja,Q9,Explain sorting,Sorting orders the data
+110,Manoj,Q9,Explain sorting,Sorting structures the data
+
+101,Arjun,Q10,Explain merge sort,Merge sort divides the array and merges sorted parts
+102,Rahul,Q10,Explain merge sort,Merge sort uses divide and conquer approach
+103,Priya,Q10,Explain merge sort,Merge sort recursively divides and merges data
+104,Neha,Q10,Explain merge sort,Merge sort combines sorted sub arrays
+105,Amit,Q10,Explain merge sort,Merge sort sorts by merging smaller lists
+106,Sneha,Q10,Explain merge sort,Merge sort is a stable sorting algorithm
+107,Ravi,Q10,Explain merge sort,Merge sort works using recursion
+108,Kiran,Q10,Explain merge sort,Merge sort divides data into halves
+109,Pooja,Q10,Explain merge sort,Merge sort merges sorted parts
+110,Manoj,Q10,Explain merge sort,Merge sort uses divide and conquer
+
+101,Arjun,Q11,Explain quick sort,Quick sort selects a pivot and partitions the array
+102,Rahul,Q11,Explain quick sort,Quick sort sorts using partitioning
+103,Priya,Q11,Explain quick sort,Quick sort divides data using pivot
+104,Neha,Q11,Explain quick sort,Quick sort uses divide and conquer
+105,Amit,Q11,Explain quick sort,Quick sort is a fast sorting method
+106,Sneha,Q11,Explain quick sort,Quick sort rearranges data around pivot
+107,Ravi,Q11,Explain quick sort,Quick sort recursively sorts sub arrays
+108,Kiran,Q11,Explain quick sort,Quick sort uses partition logic
+109,Pooja,Q11,Explain quick sort,Quick sort is an efficient sorting algorithm
+110,Manoj,Q11,Explain quick sort,Quick sort uses pivot based sorting
+
+101,Arjun,Q12,Explain graph,Graph is a set of vertices and edges
+102,Rahul,Q12,Explain graph,Graph represents connections between nodes
+103,Priya,Q12,Explain graph,Graph contains nodes and links
+104,Neha,Q12,Explain graph,Graph is used to model relationships
+105,Amit,Q12,Explain graph,Graph connects vertices using edges
+106,Sneha,Q12,Explain graph,Graph stores network data
+107,Ravi,Q12,Explain graph,Graph is a non linear structure
+108,Kiran,Q12,Explain graph,Graph represents networks
+109,Pooja,Q12,Explain graph,Graph consists of vertices and edges
+110,Manoj,Q12,Explain graph,Graph is used in network problems
+
+101,Arjun,Q13,Explain BFS,BFS visits nodes level by level
+102,Rahul,Q13,Explain BFS,BFS uses queue for traversal
+103,Priya,Q13,Explain BFS,BFS explores neighbors first
+104,Neha,Q13,Explain BFS,BFS traverses graph breadth wise
+105,Amit,Q13,Explain BFS,BFS starts from source node
+106,Sneha,Q13,Explain BFS,BFS visits all adjacent nodes first
+107,Ravi,Q13,Explain BFS,BFS uses FIFO structure
+108,Kiran,Q13,Explain BFS,BFS covers level order
+109,Pooja,Q13,Explain BFS,BFS is level based traversal
+110,Manoj,Q13,Explain BFS,BFS explores graph layer by layer
+
+101,Arjun,Q14,Explain DFS,DFS explores nodes deeply before backtracking
+102,Rahul,Q14,Explain DFS,DFS uses stack or recursion
+103,Priya,Q14,Explain DFS,DFS explores one branch fully
+104,Neha,Q14,Explain DFS,DFS is depth based traversal
+105,Amit,Q14,Explain DFS,DFS visits child nodes first
+106,Sneha,Q14,Explain DFS,DFS uses recursion approach
+107,Ravi,Q14,Explain DFS,DFS explores path deeply
+108,Kiran,Q14,Explain DFS,DFS is depth first search
+109,Pooja,Q14,Explain DFS,DFS traverses deep paths
+110,Manoj,Q14,Explain DFS,DFS explores graph deeply
+
+101,Arjun,Q15,Explain heap,Heap is a complete binary tree
+102,Rahul,Q15,Explain heap,Heap follows heap property
+103,Priya,Q15,Explain heap,Heap supports priority based access
+104,Neha,Q15,Explain heap,Heap is used in priority queue
+105,Amit,Q15,Explain heap,Heap maintains min or max order
+106,Sneha,Q15,Explain heap,Heap is a tree based structure
+107,Ravi,Q15,Explain heap,Heap is used for efficient retrieval
+108,Kiran,Q15,Explain heap,Heap keeps highest or lowest element
+109,Pooja,Q15,Explain heap,Heap supports fast operations
+110,Manoj,Q15,Explain heap,Heap is a special binary tree
+
+101,Arjun,Q16,Explain priority queue,Priority queue removes element based on priority
+102,Rahul,Q16,Explain priority queue,Priority queue processes higher priority first
+103,Priya,Q16,Explain priority queue,Priority queue is based on priority order
+104,Neha,Q16,Explain priority queue,Priority queue uses heap internally
+105,Amit,Q16,Explain priority queue,Priority queue stores elements with priorities
+106,Sneha,Q16,Explain priority queue,Priority queue is not simple FIFO
+107,Ravi,Q16,Explain priority queue,Priority queue serves based on priority
+108,Kiran,Q16,Explain priority queue,Priority queue selects highest priority
+109,Pooja,Q16,Explain priority queue,Priority queue organizes by importance
+110,Manoj,Q16,Explain priority queue,Priority queue removes important element first
+
+101,Arjun,Q17,Explain dynamic programming,Dynamic programming solves problems using subproblem results
+102,Rahul,Q17,Explain dynamic programming,Dynamic programming stores intermediate results
+103,Priya,Q17,Explain dynamic programming,Dynamic programming avoids repeated work
+104,Neha,Q17,Explain dynamic programming,Dynamic programming uses memoization
+105,Amit,Q17,Explain dynamic programming,Dynamic programming breaks problems into parts
+106,Sneha,Q17,Explain dynamic programming,Dynamic programming improves efficiency
+107,Ravi,Q17,Explain dynamic programming,Dynamic programming uses overlapping subproblems
+108,Kiran,Q17,Explain dynamic programming,Dynamic programming is an optimization technique
+109,Pooja,Q17,Explain dynamic programming,Dynamic programming stores solutions
+110,Manoj,Q17,Explain dynamic programming,Dynamic programming uses table or cache
+
+101,Arjun,Q18,Explain greedy algorithm,Greedy algorithm chooses best option at each step
+102,Rahul,Q18,Explain greedy algorithm,Greedy algorithm makes local optimal choice
+103,Priya,Q18,Explain greedy algorithm,Greedy algorithm selects immediate best
+104,Neha,Q18,Explain greedy algorithm,Greedy algorithm is simple and fast
+105,Amit,Q18,Explain greedy algorithm,Greedy algorithm builds solution step by step
+106,Sneha,Q18,Explain greedy algorithm,Greedy algorithm chooses optimal at each stage
+107,Ravi,Q18,Explain greedy algorithm,Greedy algorithm focuses on current benefit
+108,Kiran,Q18,Explain greedy algorithm,Greedy algorithm does not backtrack
+109,Pooja,Q18,Explain greedy algorithm,Greedy algorithm uses local decisions
+110,Manoj,Q18,Explain greedy algorithm,Greedy algorithm finds approximate solution
+
+101,Arjun,Q19,Explain time complexity,Time complexity measures running time of algorithm
+102,Rahul,Q19,Explain time complexity,Time complexity shows growth of execution time
+103,Priya,Q19,Explain time complexity,Time complexity depends on input size
+104,Neha,Q19,Explain time complexity,Time complexity represents efficiency
+105,Amit,Q19,Explain time complexity,Time complexity is calculated using Big O
+106,Sneha,Q19,Explain time complexity,Time complexity measures algorithm speed
+107,Ravi,Q19,Explain time complexity,Time complexity estimates running time
+108,Kiran,Q19,Explain time complexity,Time complexity compares algorithms
+109,Pooja,Q19,Explain time complexity,Time complexity predicts performance
+110,Manoj,Q19,Explain time complexity,Time complexity is time requirement
+
+101,Arjun,Q20,Explain space complexity,Space complexity measures memory used by algorithm
+102,Rahul,Q20,Explain space complexity,Space complexity shows memory requirement
+103,Priya,Q20,Explain space complexity,Space complexity depends on extra space used
+104,Neha,Q20,Explain space complexity,Space complexity represents memory usage
+105,Amit,Q20,Explain space complexity,Space complexity counts storage needed
+106,Sneha,Q20,Explain space complexity,Space complexity is auxiliary space
+107,Ravi,Q20,Explain space complexity,Space complexity measures memory efficiency
+108,Kiran,Q20,Explain space complexity,Space complexity compares memory use
+109,Pooja,Q20,Explain space complexity,Space complexity is memory consumption
+110,Manoj,Q20,Explain space complexity,Space complexity indicates memory required
